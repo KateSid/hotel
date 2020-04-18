@@ -1,0 +1,20 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/cursach</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">11</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <!-- Annotated entity classes -->
+        <mapping class="domain.Client"/>
+        <mapping class="domain.HotelRoom"/>
+        <mapping class="domain.Residence"/>
+        <mapping class="domain.ClientAdditionalService"/>
+        <mapping class="domain.AdditionalService"/>
+    </session-factory>
+</hibernate-configuration>
