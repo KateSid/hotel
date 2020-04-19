@@ -20,8 +20,10 @@
     </header>
     <main class="container">
         <p>Управление комнатами</p>
-
         <form method = "post" action="hotel_room" class="form-inline">
+            <button type="submit" class="btn btn-primary" name = "action" value = "New">Добавить</button>
+        </form>
+        <%--<form method = "post" action="hotel_room" class="form-inline">
             <label style="margin: 20px"> Стоимость комнаты </label>
             <input type="number" name="cost" min="1" value="1" placeholder="Введите стоимость" required>
             <label style="margin: 20px"> Количество персон</label>
@@ -40,8 +42,8 @@
                 <option value="VILLA">VILLA</option>
             </select>
             <button type="submit" class="btn btn-primary" name = "action" value = "Add">Добавить</button>
-        </form><br>
-        <%
+        </form><br>--%>
+        <%--<%
             HotelRoom editable = (HotelRoom) request.getAttribute("editable");
             if (editable!=null){
         %>
@@ -70,7 +72,7 @@
         </form>
         <%
             }
-        %>
+        %>--%>
         <form method="post" action="hotel_room" class="form-inline">
             <table class="table table-striped">
                 <tr>

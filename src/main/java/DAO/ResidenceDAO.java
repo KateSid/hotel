@@ -18,7 +18,8 @@ public class ResidenceDAO {
     public Optional<Residence> getById(ResidenceCompositeId id) {
         hibernateAnnotationUtil.openCurrentSession();
         Residence residence = hibernateAnnotationUtil.getCurrentSession().get(Residence.class, id);
-        Hibernate.initialize(residence.getResidenceCompositeId());
+        Hibernate.initialize(residence.getClient());
+        Hibernate.initialize(residence.getHotelRoom());
         hibernateAnnotationUtil.closeCurrentSession();
         return Optional.ofNullable(residence);
     }
@@ -78,6 +79,14 @@ public class ResidenceDAO {
 
     public void saveOrUpdate(Residence residence) {
         hibernateAnnotationUtil.openCurrentSessionwithTransaction();
+        Client client = hibernateAnnotationUtil.getCurrentSession().get(Client.class, residence.getResidenceCompositeId().getIdClient());
+        client.addResidence(residence);
+        residence.setClient(client);
+        HotelRoom hotelRoom = hibernateAnnotationUtil.getCurrentSession().get(HotelRoom.class, residence.getResidenceCompositeId().getIdHotelRoom());
+        hotelRoom.addResidence(residence);
+        residence.setHotelRoom(hotelRoom);
+        hibernateAnnotationUtil.getCurrentSession().update(client);
+        hibernateAnnotationUtil.getCurrentSession().update(hotelRoom);
         hibernateAnnotationUtil.getCurrentSession().saveOrUpdate(residence);
         hibernateAnnotationUtil.closeCurrentSessionwithTransaction();
     }

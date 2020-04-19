@@ -32,10 +32,17 @@ public class AdditionalServiceServlet extends HttpServlet {
                 additionalService.setCostAdditionalService(Integer.parseInt(req.getParameter("cost")));
                 additionalService.setNameAdditionalService(req.getParameter("name"));
                 additionalServiceDAO.save(additionalService);
+                req.setAttribute("additional_service", additionalServiceDAO.getAll());
+                req.getRequestDispatcher("additional_service.jsp").forward(req, resp);
+                break;
+            }
+            case "New": {
+                req.getRequestDispatcher("additional_service_add.jsp").forward(req, resp);
                 break;
             }
             case "Edit": {
                 req.setAttribute("editable",additionalServiceDAO.getById(Long.parseLong(req.getParameter("id"))).get());
+                req.getRequestDispatcher("additional_service_edit.jsp").forward(req, resp);
                 break;
             }
             case "Save_edit": {
@@ -43,13 +50,16 @@ public class AdditionalServiceServlet extends HttpServlet {
                 additionalService.setCostAdditionalService(Integer.parseInt(req.getParameter("cost")));
                 additionalService.setNameAdditionalService(req.getParameter("name"));
                 additionalServiceDAO.update(additionalService);
+                req.setAttribute("additional_service", additionalServiceDAO.getAll());
+                req.getRequestDispatcher("additional_service.jsp").forward(req, resp);
                 break;
             }
             case "Delete": {
                 additionalServiceDAO.deleteById(Long.parseLong(req.getParameter("id")));
+                req.setAttribute("additional_service", additionalServiceDAO.getAll());
+                req.getRequestDispatcher("additional_service.jsp").forward(req, resp);
             }
         }
-        req.setAttribute("additional_service", additionalServiceDAO.getAll());
-        req.getRequestDispatcher("additional_service.jsp").forward(req, resp);
+
     }
 }

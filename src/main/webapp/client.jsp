@@ -27,7 +27,7 @@
         <jsp:include page="menu.jsp"/>
     </header>
     <main class="container">
-        <label for="form_add">Добавить нового клиента</label>
+        <%--<label for="form_add">Добавить нового клиента</label>
         <form method = "post"  id="form_add" action="client" class="form-inline">
             <label style="margin: 20px">ФИО</label>
             <input type="text" name="fio" placeholder="Введите ФИО" pattern="[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}|[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}" required>
@@ -37,8 +37,12 @@
             <input type="text" name="phone" placeholder="Введите телефон" pattern="[0-9]{11}|[+][0-9]{11}" required>
             <button class="btn btn-primary" type="submit" name = "action" value = "Add">Добавить
                 </button>
-        </form><br>
-        <%
+        </form><br>--%>
+            <form method = "post"  id="form_add" action="client" class="form-inline">
+                <button class="btn btn-primary" type="submit" name = "action" value = "New">Добавить нового клиента
+                </button>
+            </form><br>
+       <%-- <%
             Client editClient = (Client) request.getAttribute("editable");
             if (editClient!=null){
         %>
@@ -56,7 +60,7 @@
         </form>
         <%
             }
-        %>
+        %>--%>
         <form method="post" action="client" class="form-inline">
             <table class="table table-striped">
                 <tr>

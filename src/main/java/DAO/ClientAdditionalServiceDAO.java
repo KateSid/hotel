@@ -27,6 +27,8 @@ public class ClientAdditionalServiceDAO {
         hibernateAnnotationUtil.openCurrentSession();
         ClientAdditionalService clientAdditionalService = hibernateAnnotationUtil.getCurrentSession().get(ClientAdditionalService.class, id);
         hibernateAnnotationUtil.closeCurrentSession();
+        Hibernate.initialize(clientAdditionalService.getClient());
+        Hibernate.initialize(clientAdditionalService.getAdditionalService());
         return Optional.ofNullable(clientAdditionalService);
     }
 
@@ -89,6 +91,14 @@ public class ClientAdditionalServiceDAO {
 
     public void saveOrUpdate(ClientAdditionalService clientAdditionalService) {
         hibernateAnnotationUtil.openCurrentSessionwithTransaction();
+        Client client = hibernateAnnotationUtil.getCurrentSession().get(Client.class, clientAdditionalService.getClientAdditionalServiceCompositeId().getIdClient());
+        client.addClientAdditionalService(clientAdditionalService);
+        clientAdditionalService.setClient(client);
+        AdditionalService additionalService = hibernateAnnotationUtil.getCurrentSession().get(AdditionalService.class,clientAdditionalService.getClientAdditionalServiceCompositeId().getIdAdditionalService());
+        additionalService.addClientAdditionalService(clientAdditionalService);
+        clientAdditionalService.setAdditionalService(additionalService);
+        hibernateAnnotationUtil.getCurrentSession().update(client);
+        hibernateAnnotationUtil.getCurrentSession().update(additionalService);
         hibernateAnnotationUtil.getCurrentSession().saveOrUpdate(clientAdditionalService);
         hibernateAnnotationUtil.closeCurrentSessionwithTransaction();
     }

@@ -36,38 +36,62 @@ public class ClientAdditionalServiceServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         ClientAdditionalServiceDAO clientAdditionalServiceDAO = new ClientAdditionalServiceDAO();
-        ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
-        сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
-        сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));
+
         switch (req.getParameter("action")) {
             case "Add": {
                 clientAdditionalServiceDAO.save(Long.parseLong(req.getParameter("client_id")) ,
                         Long.parseLong(req.getParameter("additional_service_id")));
+                req.setAttribute("client_additional_services",clientAdditionalServiceDAO.getAll());
+                req.getRequestDispatcher("client_additional_service.jsp").forward(req, resp);
+                break;
+            }
+            case "New": {
+                ClientDAO clientDAO =new ClientDAO();
+                AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+                req.setAttribute("clients",clientDAO.getAll());
+                req.setAttribute("additional_services",additionalServiceDAO.getAll());
+                req.getRequestDispatcher("client_additional_service_add.jsp").forward(req, resp);
                 break;
             }
             case "Edit": {
-                req.setAttribute("editable", clientAdditionalServiceDAO.getById(сompositeId).get());
+                ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
+                сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
+                сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));
+                ClientAdditionalService clientAdditionalService = clientAdditionalServiceDAO.getById(сompositeId).get();
+                req.setAttribute("editable", clientAdditionalService);
+                clientAdditionalServiceDAO.delete(clientAdditionalService);
+                ClientDAO clientDAO =new ClientDAO();
+                AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
+                req.setAttribute("clients",clientDAO.getAll());
+                req.setAttribute("additional_services",additionalServiceDAO.getAll());
+                req.getRequestDispatcher("client_additional_service_edit.jsp").forward(req, resp);
+
                 break;
             }
             case "Save_edit": {
+                ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
+                сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
+                сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));
                 ClientAdditionalService clientAdditionalService = new ClientAdditionalService();
                 clientAdditionalService.setClientAdditionalServiceCompositeId(сompositeId);
                 if (req.getParameter("check_date")!=null){
                     clientAdditionalService.setDatetime(Date.valueOf(req.getParameter("check_date")));}
-                clientAdditionalServiceDAO.update(clientAdditionalService);
+                clientAdditionalServiceDAO.saveOrUpdate(clientAdditionalService);
+                req.setAttribute("client_additional_services",clientAdditionalServiceDAO.getAll());
+                req.getRequestDispatcher("client_additional_service.jsp").forward(req, resp);
                 break;
             }
             case "Delete": {
+                ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
+                сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
+                сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));
                 ClientAdditionalService clientAdditionalService = new ClientAdditionalService();
                 clientAdditionalService.setClientAdditionalServiceCompositeId(сompositeId);
                 clientAdditionalServiceDAO.delete(clientAdditionalService);
+                req.setAttribute("client_additional_services",clientAdditionalServiceDAO.getAll());
+                req.getRequestDispatcher("client_additional_service.jsp").forward(req, resp);
             }
         }
-        ClientDAO clientDAO =new ClientDAO();
-        AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
-        req.setAttribute("clients",clientDAO.getAll());
-        req.setAttribute("additional_services",additionalServiceDAO.getAll());
-        req.setAttribute("client_additional_services",clientAdditionalServiceDAO.getAll());
-        req.getRequestDispatcher("client_additional_service.jsp").forward(req, resp);
+;
     }
 }

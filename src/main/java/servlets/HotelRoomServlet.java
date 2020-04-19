@@ -34,10 +34,17 @@ public class HotelRoomServlet extends HttpServlet {
                 hotelRoom.setNumberPersons(Integer.parseInt(req.getParameter("number_pers")));
                 hotelRoom.setTypeHotelRoom(TypeHotelRoom.valueOf(req.getParameter("type")));
                 hotelRoomDao.save(hotelRoom);
+                req.setAttribute("hotelRooms", hotelRoomDao.getAll());
+                req.getRequestDispatcher("hotel_room.jsp").forward(req, resp);
                 break;
             }
             case "Edit": {
                 req.setAttribute("editable", hotelRoomDao.getById(Long.parseLong(req.getParameter("id"))).get());
+                req.getRequestDispatcher("hotel_room_edit.jsp").forward(req, resp);
+                break;
+            }
+            case "New": {
+                req.getRequestDispatcher("hotel_room_add.jsp").forward(req, resp);
                 break;
             }
             case "Save_edit": {
@@ -46,13 +53,16 @@ public class HotelRoomServlet extends HttpServlet {
                 hotelRoom.setNumberPersons(Integer.parseInt(req.getParameter("number_pers")));
                 hotelRoom.setTypeHotelRoom(TypeHotelRoom.valueOf(req.getParameter("type")));
                 hotelRoomDao.update(hotelRoom);
+                req.setAttribute("hotelRooms", hotelRoomDao.getAll());
+                req.getRequestDispatcher("hotel_room.jsp").forward(req, resp);
                 break;
             }
             case "Delete": {
                 hotelRoomDao.deleteById(Long.parseLong(req.getParameter("id")));
+                req.setAttribute("hotelRooms", hotelRoomDao.getAll());
+                req.getRequestDispatcher("hotel_room.jsp").forward(req, resp);
             }
         }
-        req.setAttribute("hotelRooms", hotelRoomDao.getAll());
-        req.getRequestDispatcher("hotel_room.jsp").forward(req, resp);
+
     }
 }

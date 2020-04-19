@@ -29,50 +29,8 @@
     <div class="panel-body">
 
     <form method="post" action="residence" class="form-inline">
-        <label style="margin: 20px"> Клиент </label>
-            <p><select name="client_id" required size="1" class="form-control" class="custom-select">
-                <option disabled value=""></option>
-                <%
-                    List<Client> clients = (List<Client>) request.getAttribute("clients");
-                    for (Client client : clients) {
-                %>
-                <option value=<%=client.getIdClient()%>><%=client.getFio()+" "+client.getPhone()%></option>
-
-        <% }
-        %>
-            </select></p>
-        <label style="margin: 20px"> Комната </label>
-            <p><select name="hotel_room_id" required size="1" class="form-control" class="custom-select">
-                <option disabled value=""></option>
-                <%
-                    List<HotelRoom> hotelRooms = (List<HotelRoom>) request.getAttribute("hotel_rooms");
-                    for (HotelRoom hotelRoom : hotelRooms) {
-                %>
-                <option value=<%=hotelRoom.getIdHotelRoom()%>><%=hotelRoom.getTypeHotelRoom()+" Количество персон"+hotelRoom.getNumberPersons()%></option>
-
-        <% }
-        %>
-        </select></p>
-        <p><button class="btn btn-primary" type="submit" name="action" value="Add">Добавить</button></p>
+        <p><button class="btn btn-primary" type="submit" name="action" value="New">Добавить комнату клиенту</button></p>
     </form>
-    <br>
-    <%
-        Residence editResidence = (Residence) request.getAttribute("editable");
-        if (editResidence != null) {
-    %>
-        <label> Изменение даты выезда </label>
-    <form method="post" action="residence" class="form-inline" >
-        <input type="hidden" name="client_id" value=<%=editResidence.getResidenceCompositeId().getIdClient()%>>
-        <input type="hidden" name="hotel_room_id" value=<%=editResidence.getResidenceCompositeId().getIdHotelRoom()%>>
-        <input type="hidden" name="inDate" value=<%=editResidence.getResidenceCompositeId().getCheckInDatetime()%>>
-        <input type="date" class="date-picker-popup" name="outDate" style="margin-right: 20px" min=<%=editResidence.getResidenceCompositeId().getCheckInDatetime().toString()%> >
-        <button type="submit" class="btn btn-primary" name="action" value="Save_edit">Сохранить
-        </button>
-    </form>
-    <%
-        }
-    %>
-
     <form method="post" action="residence" style="display:inline;">
         <table class="table table-striped">
             <tr>
@@ -113,7 +71,7 @@
                                value=<%=residence.getResidenceCompositeId().getIdHotelRoom()%>>
                         <input type="hidden" name="inDate"
                                value=<%=residence.getResidenceCompositeId().getCheckInDatetime()%>>
-                        <button class="btn btn-info" type="submit" name="action" value="Edit">  Изменить дату выезда
+                        <button class="btn btn-info" type="submit" name="action" value="Edit">  Редактировать
                         </button>
                     </form>
                 </td>

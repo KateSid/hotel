@@ -40,10 +40,17 @@ public class ClientServlet extends HttpServlet {
                 client.setPassportData(req.getParameter("passport_data"));
                 client.setPhone(req.getParameter("phone"));
                 clientDAO.save(client);
+                req.setAttribute("clients", clientDAO.getAll());
+                req.getRequestDispatcher("client.jsp").forward(req, resp);
+                break;
+            }
+            case "New": {
+                req.getRequestDispatcher("client_add.jsp").forward(req, resp);
                 break;
             }
             case "Edit": {
                 req.setAttribute("editable", clientDAO.getById(Long.parseLong(req.getParameter("id"))).get());
+                req.getRequestDispatcher("client_edit.jsp").forward(req, resp);
                 break;
             }
             case "Save_edit": {
@@ -52,13 +59,17 @@ public class ClientServlet extends HttpServlet {
                 client.setPassportData(req.getParameter("passport_data"));
                 client.setPhone(req.getParameter("phone"));
                 clientDAO.update(client);
+                req.setAttribute("clients", clientDAO.getAll());
+                req.getRequestDispatcher("client.jsp").forward(req, resp);
                 break;
             }
             case "Delete": {
                 clientDAO.deleteById(Long.parseLong(req.getParameter("id")));
+                req.setAttribute("clients", clientDAO.getAll());
+                req.getRequestDispatcher("client.jsp").forward(req, resp);
+                break;
             }
         }
-        req.setAttribute("clients", clientDAO.getAll());
-        req.getRequestDispatcher("client.jsp").forward(req, resp);
+
     }
 }

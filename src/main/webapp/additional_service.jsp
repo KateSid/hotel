@@ -19,15 +19,18 @@
         <jsp:include page="menu.jsp"/>
     </header>
     <main class="container">
-        <label> Добавить сервис </label>
+        <form method = "post" action="additional_service" class="form-inline">
+            <button type="submit" class="btn btn-primary" name = "action" value = "New">Добавить сервис</button>
+        </form>
+       <%-- <label> Добавить сервис </label>
         <form method = "post" action="additional_service" class="form-inline">
             <label style="margin: 20px"> Стоимость сервиса </label>
             <input type="number" name="cost" min="1" value="1" placeholder="Введите стоимость" required>
             <label style="margin: 20px"> Название сервиса</label>
             <input type="text" name="name" placeholder="Введите название" required>
             <button type="submit" class="btn btn-primary" name = "action" value = "Add">Добавить</button>
-        </form><br>
-        <%
+        </form><br>--%>
+   <%--     <%
             AdditionalService editAditService = (AdditionalService) request.getAttribute("editable");
             if (editAditService!=null){
         %>
@@ -43,7 +46,7 @@
         </form>
         <%
             }
-        %>
+        %>--%>
         <form method="post" action="additional_service" class="form-inline">
             <table class="table table-striped">
                 <tr>
