@@ -57,18 +57,20 @@ public class ClientAdditionalServiceServlet extends HttpServlet {
                 ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
                 сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
                 сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));
-                ClientAdditionalService clientAdditionalService = clientAdditionalServiceDAO.getById(сompositeId).get();
-                req.setAttribute("editable", clientAdditionalService);
-                clientAdditionalServiceDAO.delete(clientAdditionalService);
+                req.setAttribute("editable",clientAdditionalServiceDAO.getById(сompositeId).get() );
                 ClientDAO clientDAO =new ClientDAO();
                 AdditionalServiceDAO additionalServiceDAO = new AdditionalServiceDAO();
                 req.setAttribute("clients",clientDAO.getAll());
                 req.setAttribute("additional_services",additionalServiceDAO.getAll());
                 req.getRequestDispatcher("client_additional_service_edit.jsp").forward(req, resp);
-
                 break;
             }
             case "Save_edit": {
+                ClientAdditionalServiceCompositeId oldCompositeId=new ClientAdditionalServiceCompositeId();
+                oldCompositeId.setIdClient(Long.parseLong(req.getParameter("old_client_id")));
+                oldCompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("old_additional_service_id")));
+                ClientAdditionalService oldClientAdditionalService = clientAdditionalServiceDAO.getById(oldCompositeId).get();
+                clientAdditionalServiceDAO.delete(oldClientAdditionalService);
                 ClientAdditionalServiceCompositeId сompositeId=new ClientAdditionalServiceCompositeId();
                 сompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
                 сompositeId.setIdAdditionalService(Long.parseLong(req.getParameter("additional_service_id")));

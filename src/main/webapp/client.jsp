@@ -26,45 +26,9 @@
     <header>
         <jsp:include page="menu.jsp"/>
     </header>
-    <main class="container">
-        <%--<label for="form_add">Добавить нового клиента</label>
-        <form method = "post"  id="form_add" action="client" class="form-inline">
-            <label style="margin: 20px">ФИО</label>
-            <input type="text" name="fio" placeholder="Введите ФИО" pattern="[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}|[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}" required>
-            <label style="margin: 20px">Паспорт</label>
-            <input type="text" name="passport_data" placeholder="Введите серию и номер паспорта" pattern="[0-9]{10}" required>
-            <label style="margin: 20px">Телефон</label>
-            <input type="text" name="phone" placeholder="Введите телефон" pattern="[0-9]{11}|[+][0-9]{11}" required>
-            <button class="btn btn-primary" type="submit" name = "action" value = "Add">Добавить
-                </button>
-        </form><br>--%>
-            <form method = "post"  id="form_add" action="client" class="form-inline">
-                <button class="btn btn-primary" type="submit" name = "action" value = "New">Добавить нового клиента
-                </button>
-            </form><br>
-       <%-- <%
-            Client editClient = (Client) request.getAttribute("editable");
-            if (editClient!=null){
-        %>
-        <label for="form_save_edit">Редактирование клиента</label>
-        <form id="form_save_edit" method="post" action="client" class="form-inline">
-            <input type=hidden name="id" value=<%=editClient.getIdClient()%>>
-            <label style="margin: 20px">ФИО</label>
-            <input type=text name="fio" pattern="[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}|[А-Я]{1}[а-я]{1,14} [А-Я]{1}[а-я]{1,14}" value=<%=editClient.getFio()%>>
-            <label style="margin: 20px">Паспорт</label>
-            <input type=text name="passport_data" pattern="[0-9]{10}" value=<%=editClient.getPassportData()%>>
-            <label style="margin: 20px">Телефон</label>
-            <input type=text name="phone" pattern="[0-9]{11}|[+][0-9]{11}" value=<%=editClient.getPhone()%>>
-            <button type="submit" name="action" class="btn btn-primary" value="Save_edit">Save edit
-            </button>
-        </form>
-        <%
-            }
-        %>--%>
-        <form method="post" action="client" class="form-inline">
+    <main>
             <table class="table table-striped">
                 <tr>
-                    <th>ID клиента</th>
                     <th>Фио</th>
                     <th>Паспортные данные</th>
                     <th>Телефон</th>
@@ -77,9 +41,6 @@
                     for (Client client : clients) {
                 %>
                 <tr>
-                    <td>
-                        <p><%=client.getIdClient()%></p>
-                    </td>
                     <td>
                         <p><%=client.getFio()%></p>
                     </td>
@@ -109,8 +70,10 @@
                     }
                 %>
             </table>
+        <form method = "post"  id="form_add" action="client" class="form-inline">
+            <button class="btn btn-primary" type="submit" name = "action" value = "New">Добавить нового клиента
+            </button>
         </form>
-
     </main>
 </body>
 </html>

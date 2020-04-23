@@ -20,15 +20,14 @@ import java.util.Optional;
 
 public class ClientAdditionalServiceDAO {
     private static HibernateAnnotationUtil hibernateAnnotationUtil = new HibernateAnnotationUtil();
-    private static EntityManager entityManager;
-
 
     public Optional<ClientAdditionalService> getById(ClientAdditionalServiceCompositeId id) {
         hibernateAnnotationUtil.openCurrentSession();
         ClientAdditionalService clientAdditionalService = hibernateAnnotationUtil.getCurrentSession().get(ClientAdditionalService.class, id);
-        hibernateAnnotationUtil.closeCurrentSession();
+
         Hibernate.initialize(clientAdditionalService.getClient());
         Hibernate.initialize(clientAdditionalService.getAdditionalService());
+        hibernateAnnotationUtil.closeCurrentSession();
         return Optional.ofNullable(clientAdditionalService);
     }
 

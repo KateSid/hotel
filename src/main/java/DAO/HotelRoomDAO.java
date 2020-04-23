@@ -14,7 +14,6 @@ import java.util.Optional;
 
 public class HotelRoomDAO implements HotelDAO<HotelRoom> {
     private static HibernateAnnotationUtil hibernateAnnotationUtil = new HibernateAnnotationUtil();
-    private static EntityManager entityManager;
 
     @Override
     public Optional<HotelRoom> getById(long id) {

@@ -9,20 +9,33 @@
 <html>
 <head>
     <title>Menu</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        .topnav {
+            background-color: blue;
+            overflow: hidden;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 18px 18px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
 </head>
 <body class="container">
-    <nav class="navigation navig">
-        <a  href="http://localhost:8080/cursach/">&ensp;На главную&ensp;</a>&ensp;
-        <a  href="client">&ensp;Клиенты&ensp;</a>&ensp;
-        <a  href="hotel_room">&ensp;Комнаты&ensp;</a>&ensp;
-        <a  href="residence">&ensp;Занятые комнаты&ensp;</a>&ensp;
-        <a  href="additional_service">&ensp;Дополнительные услуги&ensp;</a>&ensp;
-       <a  href="client_additional_service">&ensp;Дополнительные услуги клиентов&ensp;</a>&ensp;
-
-    </nav>
-
+    <div class="topnav">
+        <a  href="http://localhost:8080/cursach/">На главную</a>
+        <a  href="client">Клиенты</a>
+        <a  href="hotel_room">Комнаты</a>
+        <a  href="residence">Занятые комнаты</a>
+        <a  href="additional_service">Дополнительные сервисы&ensp;</a>
+       <a  href="client_additional_service">Дополнительные сервисы клиентов</a>
+    </div>
 </body>
 </html>

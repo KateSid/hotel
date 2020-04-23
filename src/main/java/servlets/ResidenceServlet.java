@@ -63,9 +63,6 @@ public class ResidenceServlet extends HttpServlet {
                 residenceCompositeId.setIdHotelRoom(Long.parseLong(req.getParameter("hotel_room_id")));
                 residenceCompositeId.setCheckInDatetime(Date.valueOf(req.getParameter("inDate")));
                 req.setAttribute("editable", residenceDAO.getById(residenceCompositeId).get());
-                Residence residence = new Residence();
-                residence.setResidenceCompositeId(residenceCompositeId);
-                residenceDAO.delete(residence);
                 ClientDAO clientDAO =new ClientDAO();
                 HotelRoomDAO hotelRoomDAO = new HotelRoomDAO();
                 req.setAttribute("clients",clientDAO.getAll());
@@ -75,6 +72,13 @@ public class ResidenceServlet extends HttpServlet {
                 break;
             }
             case "Save_edit": {
+                ResidenceCompositeId oldResidenceCompositeId=new ResidenceCompositeId();
+                oldResidenceCompositeId.setIdClient(Long.parseLong(req.getParameter("old_client_id")));
+                oldResidenceCompositeId.setIdHotelRoom(Long.parseLong(req.getParameter("old_hotel_room_id")));
+                oldResidenceCompositeId.setCheckInDatetime(Date.valueOf(req.getParameter("old_inDate")));
+                Residence old = new Residence();
+                old.setResidenceCompositeId(oldResidenceCompositeId);
+                residenceDAO.delete(old);
                 ResidenceCompositeId residenceCompositeId=new ResidenceCompositeId();
                 residenceCompositeId.setIdClient(Long.parseLong(req.getParameter("client_id")));
                 residenceCompositeId.setIdHotelRoom(Long.parseLong(req.getParameter("hotel_room_id")));

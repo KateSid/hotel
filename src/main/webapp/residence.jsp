@@ -21,17 +21,7 @@
 <header>
     <jsp:include page="menu.jsp"/>
 </header>
-<main class="container">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <span class="label label-info">Управление занятыми комнатами</span>
-        </div>
-    <div class="panel-body">
-
-    <form method="post" action="residence" class="form-inline">
-        <p><button class="btn btn-primary" type="submit" name="action" value="New">Добавить комнату клиенту</button></p>
-    </form>
-    <form method="post" action="residence" style="display:inline;">
+<main>
         <table class="table table-striped">
             <tr>
                 <th>Клиент</th>
@@ -52,7 +42,7 @@
                     </p>
                 </td>
                 <td>
-                    <p><%=residence.getHotelRoom().getTypeHotelRoom()+" Количество персон"+residence.getHotelRoom().getNumberPersons()%>
+                    <p><%=residence.getHotelRoom().getTypeHotelRoom()+" Количество персон "+residence.getHotelRoom().getNumberPersons()%>
                     </p>
                 </td>
                 <td>
@@ -93,9 +83,9 @@
                     }
             %>
         </table>
+    <form method="post" action="residence" class="form-inline">
+        <p><button class="btn btn-primary" type="submit" name="action" value="New">Добавить комнату клиенту</button></p>
     </form>
-    </div>
-    </div>
 </main>
 </body>
 </html>

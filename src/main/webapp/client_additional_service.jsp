@@ -20,12 +20,8 @@
     <header>
         <jsp:include page="menu.jsp"/>
     </header>
-    <main class="container">
-        <form method="post" action="client_additional_service" class="form-inline">
-            <button class="btn btn-primary" type="submit" name="action" value="New">Добавить сервис для клиента</button>
-        </form>
-        <form method="post" action="client_additional_service" style="display:inline;">
-            <table class="table table-striped">
+    <main>
+       <table class="table table-striped">
                 <tr>
                     <th>Клиент</th>
                     <th>Сервис</th>
@@ -78,6 +74,8 @@
                         }
                 %>
             </table>
+        <form method="post" action="client_additional_service" class="form-inline">
+            <button class="btn btn-primary" type="submit" name="action" value="New">Добавить сервис для клиента</button>
         </form>
     </main>
 </body>
