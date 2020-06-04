@@ -9,24 +9,7 @@
 <html>
 <head>
     <title>Menu</title>
-    <style>
-        .topnav {
-            background-color: blue;
-            overflow: hidden;
-        }
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 18px 18px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-        .topnav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body class="container">
     <div class="topnav">

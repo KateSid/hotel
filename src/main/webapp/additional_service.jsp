@@ -7,17 +7,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:include page="menu.jsp"/>
 <html>
 <head>
     <title>Дополнительные сервисы</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
-    <header>
-        <jsp:include page="menu.jsp"/>
-    </header>
     <main>
             <table class="table table-striped">
                 <tr>
@@ -40,14 +39,14 @@
                     </td>
                     <td>
                         <form method="post" action="additional_service" class="form-inline">
-                            <input type="hidden" name="id" value=<%=additionalService.getIdAdditionalService()%>>
+                            <input type="hidden" name="id" value="<%=additionalService.getIdAdditionalService()%>">
                             <button type="submit" name="action" class="btn btn-info" value="Edit">Редактировать
                             </button>
                         </form>
                     </td>
                     <td>
                         <form method="post" action="additional_service" class="form-inline">
-                            <input type="hidden" name="id" value=<%=additionalService.getIdAdditionalService()%>>
+                            <input type="hidden" name="id" value="<%=additionalService.getIdAdditionalService()%>">
                             <button type="submit" name="action" class="btn btn-warning"value="Delete"> Удалить
                             </button>
                         </form>

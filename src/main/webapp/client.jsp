@@ -14,19 +14,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-
+<jsp:include page="menu.jsp"/>
 <html>
 <head>
     <title>Управление клиентами</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
-    <header>
-        <jsp:include page="menu.jsp"/>
-    </header>
-    <main>
+    <main >
             <table class="table table-striped">
                 <tr>
                     <th>Фио</th>
@@ -52,14 +50,14 @@
                     </td>
                     <td>
                         <form method="post" action="client" class="form-inline">
-                            <input type="hidden" name="id" value=<%=client.getIdClient()%>>
+                            <input type="hidden" name="id" value="<%=client.getIdClient()%>">
                             <button class="btn btn-info" type="submit" name="action" value="Edit">Редактировать
                             </button>
                         </form>
                     </td>
                     <td>
                         <form method="post" action="client" class="form-inline">
-                            <input type="hidden" name="id" value=<%=client.getIdClient()%>>
+                            <input type="hidden" name="id" value="<%=client.getIdClient()%>">
                             <button class="btn btn-warning" type="submit" name="action" value="Delete">Удалить
                             </button>
                         </form>
